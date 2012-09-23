@@ -25,5 +25,6 @@ div.preview {
 }
 
 input {
-	color: black;
+	color: black !important;
+	text-shadow: none !important;
 }
