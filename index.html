@@ -1,160 +1,61 @@
-
 <!DOCTYPE HTML>
 <html>
 <head>
-<!-- <meta name="viewport" content="width=device-width; user-scalable=no" /> -->
+<meta name="viewport" content="width=device-width; user-scalable=no" />
 <meta http-equiv="Content-type" content="text/html; charset=utf-8">
 
-<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0-alpha.1/jquery.mobile-1.2.0-alpha.1.min.css" />
-<script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+<link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="css/ui.css" />
+
+<link rel="stylesheet" type="text/css" media="all" href="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile.structure-1.2.0-rc.2.min.css" />
+<script src="http://code.jquery.com/jquery-1.8.1.min.js"></script>
 <script>
 localStorage;
 $(document).bind("mobileinit", function() {
-    $.mobile.buttonMarkup.hoverDelay = 0;	
+	$.mobile.buttonMarkup.hoverDelay = 0;
+	$.mobile.nonHistorySelectors = "dialog";
+
+	$.mobile.defaultPageTransition = "slide";
 });
 </script>
-<script src="http://code.jquery.com/mobile/1.2.0-alpha.1/jquery.mobile-1.2.0-alpha.1.min.js"></script>
-
-<script>
-var App = {
-	colors: {
-		first: "#ffffff",
-		second: "#000000"
-	},
-
-	status: 0,
-	timer: null,
-
-	interval: 1000, //milliseconds
-	transition: "flash",
-	transitions: {
-		flash: function(el) {
-			clearInterval(App.timer);
-			App.timer = setInterval(function() {
-				var color = App.rgb2hex(el.css("background-color")) == App.colors.first ? App.colors.second : App.colors.first;
-				el.css("background-color", color);
-				console.log();
-			}, App.interval, false);
-		},
-
-		pulse: function(el) {
-			clearInterval(App.timer);
-			App.timer = setInterval(function() {
-				var color = App.rgb2hex(el.css("background-color")) == App.colors.first ? App.colors.second : App.colors.first;
-				el.css("background-color", App.colors.second);
-				console.log(color);
-				el.animate({
-					opacity: 0.2
-				}, 200, function() {
-					el.css("opacity", 1);
-				});
-			}, App.interval, false);
-		},
-
-		burst: function(el) {
-			clearInterval(App.timer);
-			App.timer = setInterval(function() {
-				var color = App.rgb2hex(el.css("background-color")) == App.colors.first ? App.colors.second : App.colors.first;
-				el.css("background-color", color);
-			}, App.interval, false);
-		}
-	},
-
-	activate: function(name) {
-		if(App.load(name)) {
-			App.transitions[App.transition]($("div#active div"));
-		}
-	},
-	preview: function() {
-		App.transitions[App.transition]($("div.preview"));
-	},
-
-	save: function(name) {
-		var name = $("input#name").val();
-		if(name == "") alert("Please choose a name");
-
-		localStorage.setItem(name, JSON.stringify({
-			name: name,
-			colors: {
-				first: {
-					hex: App.colors.first,
-					name: $("a#color-one span.ui-btn-text").html()
-				},
-				second: {
-					hex: App.colors.second,
-					name: $("a#color-two span.ui-btn-text").html()
-				}
-			},
-			interval: App.interval,
-			transition: App.transition
-		}));
-	},
-	load: function(name) {
-		$.mobile.changePage("#settings");
-	},
-
-	"delete": function(name) {
-		if(localStorage.getItem(name) != null) {
-			localStorage.removeItem(name);
-		}
-	},
-	cancel: function() {
-		$("input#name").val("");
-		$("a#color-one").html("");
-	},
-
-	rgb2hex: function(rgb) {
-	    rgb = rgb.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
-	    function hex(x) {
-	        return ("0" + parseInt(x).toString(16)).slice(-2);
-	    }
-	    return "#" + hex(rgb[1]) + hex(rgb[2]) + hex(rgb[3]);
-	}
-};
-</script>
-
-<style>
-div.preview {
-	width: 100%;
-	height: 100px;
-	background-color: #000000;
-}
-</style>
+<script src="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile-1.2.0-rc.2.min.js"></script>
+<script src="js/app.js"></script>
 </head>
-<body bgColor="red">
+
+<body class="bg ">
 
 	<div data-role="page" id="home">
 		<div data-role="content">
 			<span class="header">QikLight</span>
 
 			<ul data-role="listview" data-inset="true">
-				<li><a href="#settings">Settings</a></li>
-				<li><a href="#profiles">Profiles</a></li>
+				<li><a href="#settings">Create Profile</a></li>
+				<li><a href="#profiles">View Profiles</a></li>
 				<li><a href="#about">About QikLight</a></li>
 			</ul>
 		</div>
 	</div>
 
-	<div data-role="page" id="active">
+	<div data-role="page" id="active" style="background-image: none !important; background-color: Black;">
 		<div data-role="content">
-			<a data-role="button" data-icon="home" data-iconpos="notext" onClick="history.back();return false;" style="float: right; margin-top: 0px;"></a>
+			<a data-role="button" data-icon="home" data-iconpos="notext" onClick="App.home()" style="float: right; margin-top: 0px;"></a>
 		</div>
 	</div>
 
 	<div data-role="page" id="settings">
 		<div data-role="content">
-			<a data-role="button" data-icon="home" data-iconpos="notext" onClick="history.back();return false;" style="float: right; margin-top: 0px;"></a><span class="header">QikLight</span><br><br>
+			<a data-role="button" data-icon="home" data-iconpos="notext" onClick="App.home()" style="float: right; margin-top: 0px;"></a><span class="header">QikLight</span><br><br>
 
-			<label for="name">Profile Name:</label>
+			<label for="name">Profile Name</label>
     		<input type="text" name="name" id="name" value=""/>
 
-			<label for="color-grid">Colors:</label>
+			<label for="color-grid">Colors</label>
 			<fieldset class="ui-grid-a" id="color-grid" name="color-grid">
 				<div class="ui-block-a"><a href="#colorPopup" data-rel="popup" data-role="button" id="color-one">Black</a></div>
 				<div class="ui-block-b"><a href="#colorPopup" data-rel="popup" data-role="button" id="color-two">White</a></div>
 			</fieldset>
 
-			<label for="interval" class="select">Interval:</label>
+			<label for="interval" class="select">Interval</label>
 			<select name="interval" id="interval">
 			   <option value="250">.25 seconds</option>
 			   <option value="500">.5 seconds</option>
@@ -162,33 +63,24 @@ div.preview {
 			   <option value="1000" selected>1 second</option>
 			   <option value="2000">2 seconds</option>
 			   <option value="5000">5 seconds</option>
-			   <option value="10000">10 seconds</option>
-			   <option value="15000">15 seconds</option>
-			   <option value="30000">30 seconds</option>
-			   <option value="45000">45 seconds</option>
-			   <option value="60000">60 seconds</option>
 			</select>
 
-			<label for="transition" class="select">Transition:</label>
+			<label for="transition" class="select">Transition</label>
 			<select name="transition" id="transition">
 			   <option value="flash">Flash</option>
 			   <!-- <option value="burst">Burst</option> -->
 			   <option value="pulse">Pulse</option>
 			</select>
 
-			<label for="transition" class="select">Preview:</label>
+			<label for="preview" class="select">Preview</label>
 			<fieldset class="ui-grid-solo" id="preview" name="preview">
-				<div class="ui-block-a preview"></div>
-			</fieldset>
-
-			<fieldset class="ui-grid-solo" id="preview" name="preview">
-				<div class="ui-block-a" id="preview-button"><button type="submit" data-theme="c" onClick="App.preview();">Preview</button></div>
+				<div class="ui-block-a preview ui-corner-all"></div>
 			</fieldset>
 		</div>
 
 		<fieldset class="ui-grid-a">
 			<div class="ui-block-a"><button type="submit" data-theme="b" data-icon="check" id="save" name="save" onClick="App.save()">Save</button></div>
-			<div class="ui-block-b"><button type="submit" data-theme="c" data-icon="delete" id="cancel" name="cancel" onClick="history.back();return false;">Cancel</button></div>
+			<div class="ui-block-b"><button type="submit" data-theme="c" data-icon="delete" id="cancel" name="cancel" onClick="App.cancel()">Cancel</button></div>
 		</fieldset>
 
 		<div data-role="popup" id="colorPopup">
@@ -201,11 +93,16 @@ div.preview {
 				<li style="background: green;" data-color="#00ff00"><a href="#color">Green</a></li>
 			</ul>
 		</div>
+
+		<div data-role="popup" id="profileNamePopup" class="ui-content" data-overlay-theme="a">
+			<a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Close</a>
+			Please enter a profile name
+		</div>
 	</div>
 
 	<div data-role="page" id="profiles">
 		<div data-role="content">
-			<a data-role="button" data-icon="home" data-iconpos="notext" onClick="history.back();return false;" style="float: right; margin-top: 0px;"></a><span class="header">QikLight</span><br><br>
+			<a data-role="button" data-icon="home" data-iconpos="notext" onClick="App.home()" style="float: right; margin-top: 0px;"></a><span class="header">QikLight</span><br><br>
 
 			<div id="profiles-list">
 			</div>
@@ -221,13 +118,9 @@ var secondColor = null;
 
 $(document).bind("pagebeforechange", function(event, data) {
 	if(data.toPage[0].id == "profiles") {
-		$("div#profiles-list").empty();
-		for (var i = 0; i < localStorage.length; i++) {
-			var entry = localStorage.getItem(localStorage.key(i));
-			var profile = JSON.parse(entry);
-			$("#profiles-list").append('<div data-role="collapsible"><h3>'+ profile.name +'</h3><fieldset class="ui-grid-b"><div class="ui-block-a"><button type="submit" data-theme="c" name="activate" onClick="App.activate("'+profile.name+'")>Activate</button></div><div class="ui-block-b"><button type="submit" data-theme="c" name="edit" onClick="App.load("'+ profile.name +'")">Edit</button></div><div class="ui-block-c"><button type="submit" data-theme="c" name="delete" onClick="App.delete("'+profile.name+'")>Delete</button></div></fieldset></div>');
-		}
-		$("div#profiles-list").trigger("create");
+		App.loadProfiles();
+	} else if(data.toPage[0].id == "settings") {
+		App.preview();
 	}
 });
 
@@ -243,19 +136,21 @@ $("a[href='#colorPopup']").click(function(event) {
 
 $("div#colorPopup ul li").click(function(event) {
 	if(firstColorSelected) {
-		App.colors.first = $(this).attr("data-color");
+		App.profile.colors.first.hex = $(this).attr("data-color");
 		$("a#color-one span.ui-btn-text").html( $(this).find("a").html() );
 	} else {
-		App.colors.second = $(this).attr("data-color");
+		App.profile.colors.second.hex = $(this).attr("data-color");
 		$("a#color-two span.ui-btn-text").html( $(this).find("a").html() );
 	}
 });
 
 $("select#interval").change(function() {
-	App.interval = $(this).attr("value");
+	App.profile.interval = $(this).attr("value");
+	App.preview();
 });
 $("select#transition").change(function() {
-	App.transition = $(this).attr("value");
+	App.profile.transition = $(this).attr("value");
+	App.preview();
 });
 </script>
 

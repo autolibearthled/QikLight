@@ -18,8 +18,7 @@
 	<preference name="orientation" value="both" />
 	<preference name="show-splash-screen-spinner" value="false" />
 	<preference name="permissions" value="none" />
-
-
+	<preference name="webviewbounce" value="false" />
 
 	<icon src="icons/ios/regular.png" width="57" height="57" />
 	<icon src="icons/ios/ipad.png" gap:platform="ios" width="72" height="72" />
