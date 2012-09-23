@@ -107,7 +107,7 @@ var App = {
 	},
 	loadProfiles: function() {
 		$("div#profiles-list").empty();
-		if(localStorage.length == 0) {
+		if(localStorage.length != 0) {
 			for (var i = 0; i < localStorage.length; i++) {
 				var profile = JSON.parse(localStorage.getItem(localStorage.key(i)));
 				$("div#profiles-list").append('<div data-role="collapsible"><h3>'+ profile.name +'</h3><button type="submit" data-theme="c" name="activate" onClick="App.activate(\''+profile.name+'\')">Activate</button><button type="submit" data-theme="c" name="edit" onClick="App.edit(\''+ profile.name +'\')">Edit</button><button type="submit" data-theme="c" name="delete" onClick="App.delete(\''+profile.name+'\')">Delete</button></div>');
