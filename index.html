@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" media="all" href="css/style.css" />
 	<link rel="stylesheet" type="text/css" media="all" href="css/ui.css" />
 
-	<link rel="stylesheet" type="text/css" media="all" href="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile.structure-1.2.0-rc.2.min.css" />
+	<link rel="stylesheet" type="text/css" media="all" href="css/jquery.mobile.structure-1.2.0.min.css" />
 	<script src="js/jquery-1.8.1.min.js"></script>
 	<script>
 	localStorage;
@@ -18,7 +18,7 @@
 		$.mobile.defaultPageTransition = "slide";
 	});
 	</script>
-	<script src="http://code.jquery.com/mobile/1.2.0-rc.2/jquery.mobile-1.2.0-rc.2.min.js"></script>
+	<script src="js/jquery.mobile-1.2.0.min.js"></script>
 	<script src="js/app.js"></script>
 </head>
 
@@ -106,6 +106,18 @@
 
 			<div id="profiles-list">
 			</div>
+		</div>
+	</div>
+
+	<div data-role="page" id="about">
+		<div data-role="content">
+			<a data-role="button" data-icon="home" data-iconpos="notext" onClick="App.home()" style="float: right; margin-top: 0px;"></a><span class="header">QikLight</span><br><br>
+
+			<strong>Idea</strong>
+			<p>After getting caught late night at the office without proper lighting with only our bikes to get home, we decided that there should be an app for this, however there was already a few out so we made a better one.</p>  
+
+			<strong>Company</strong>
+			<p>We're just a group of technology enthusiasts trying to make awesome mobile apps.  With our powers combined we will continue deliver low-cost and open source products to our communities.</p>
 		</div>
 	</div>
 

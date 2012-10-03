@@ -4,19 +4,12 @@
 
 	<name>QikLight</name>
 
-	<description>
-		A super sic app that makes you noticable in even the most
-		darkest of places
-	</description>
+	<description>A super sic app that makes you noticeable in even the most darkest of places</description>
 
-	<author href="http://www.boxware.net" email="qiklight@boxware.net">
-		Boxware, LLC
-	</author>
-
-	<!-- <icon src="icon.png" gap:role="default" /> -->
+	<author href="http://www.boxware.net" email="qiklight@boxware.net">Boxware, LLC</author>
 
 	<preference name="orientation" value="both" />
-	<preference name="show-splash-screen-spinner" value="false" />
+	<preference name="show-splash-screen-spinner" value="true" />
 	<preference name="permissions" value="none" />
 	<preference name="webviewbounce" value="false" />
 
