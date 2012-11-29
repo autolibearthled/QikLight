@@ -1,13 +1,19 @@
 .header {
 	width: 107px;
 	height: 19px;
-	background: url('../images/logo.png') no-repeat;
-	text-indent: -9999px;
+	font-size: 20pt;
+	font-family: Share-TechMono;
 	display: block;
+	padding-bottom: 25px;
 }
 
 label {
-	font-size: 12px !important; line-height: 1.4; display: block; font-weight: normal; margin: 0 0 .3em; text-transform: uppercase;
+	font-size: 12px !important;
+	line-height: 1.4;
+	display: block;
+	font-weight: normal;
+	margin: 0 0 .3em;
+	text-transform: uppercase;
 }
 
 div.preview {
@@ -27,4 +33,9 @@ div.preview {
 input {
 	color: black !important;
 	text-shadow: none !important;
+}
+
+@font-face {
+	font-family: Share-TechMono;
+	src: url('Share-TechMono.ttf') format('truetype');
 }
